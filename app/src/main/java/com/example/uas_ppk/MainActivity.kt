@@ -1,12 +1,11 @@
 package com.example.uas_ppk
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import com.example.uas_ppk.databinding.ActivityMainBinding
-import com.example.uas_ppk.fragment.DataProdukFragment
+import com.example.uas_ppk.fragment.DataContentFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -26,15 +25,15 @@ class MainActivity : AppCompatActivity() {
             false
         })
 
-        binding.btnAdd.setOnClickListerner{
-            startActivity(Intent(this, FormAddProdukActivity::class.java))
-        }
+//        binding.btnAdd.setOnClickListerner{
+//            startActivity(Intent(this, FormAddContentActivity::class.java))
+//        }
     }
 
     fun showDataFragment(){
         val mFragmentManager = supportFragmentManager
         val mFragmentTransaction = mFragmentManager.beginTransaction()
-        val mFragment = DataProdukFragment()
+        val mFragment = DataContentFragment()
 
         val textCari = binding.txtCari.text
         val mBundle = Bundle()

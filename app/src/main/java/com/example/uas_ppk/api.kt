@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface api {
-    @GET("produk/{cari}")
-    fun getData(@Path("cari") cari:String? = null): Call<ResponseDataProduk>
+    @GET("content/{cari}")
+    fun getData(@Path("cari") cari:String? = null): Call<ResponseDataContent>
 }
