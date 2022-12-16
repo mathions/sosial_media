@@ -1,5 +1,6 @@
 package com.example.uas_ppk
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
@@ -25,9 +26,9 @@ class MainActivity : AppCompatActivity() {
             false
         })
 
-//        binding.btnAdd.setOnClickListerner{
-//            startActivity(Intent(this, FormAddContentActivity::class.java))
-//        }
+        binding.btnAdd.setOnClickListener{
+            startActivity(Intent(this, FormAddContentActivity::class.java))
+        }
     }
 
     fun showDataFragment(){
