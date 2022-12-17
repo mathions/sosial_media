@@ -23,11 +23,10 @@ class FormAddContentActivity : AppCompatActivity() {
 
     fun saveData(){
         with(binding){
-            val txtUsername = "user"
-            val username = txtUsername.toString()
-            val image = txtImage.toString()
-            val caption = txtCaption.toString()
-            val date = txtDate.toString()
+            val username = "user"
+            val image = txtImage.text.toString()
+            val caption = txtCaption.text.toString()
+            val date = txtDate.text.toString()
 
             RClient.instance.createData(username,image,caption,date).enqueue(object : Callback<ResponseCreate>{
                 override fun onResponse(

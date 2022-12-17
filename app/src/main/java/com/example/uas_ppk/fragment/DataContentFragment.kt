@@ -55,7 +55,7 @@ class DataContentFragment : Fragment() {
                     listContent.clear()
                     response.body()?.let { listContent.addAll(it.data) }
 
-                    val adapter = ContentAdapter(listContent)
+                    val adapter = ContentAdapter(listContent,requireContext())
                     binding.rvData.adapter = adapter
                     adapter.notifyDataSetChanged()
                     binding.progressBar.isVisible = false

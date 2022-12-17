@@ -1,11 +1,7 @@
 package com.example.uas_ppk
 
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface api {
     @GET("content/{cari}")
@@ -19,4 +15,7 @@ interface api {
         @Field("caption") caption:String?,
         @Field("date") date:String?
         ):Call<ResponseCreate>
+
+    @DELETE("content/{id}")
+    fun deleteData(@Path("id") id:String?):Call<ResponseCreate>
 }
