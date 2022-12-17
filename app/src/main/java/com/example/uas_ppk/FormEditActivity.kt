@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.uas_ppk.databinding.ActivityFormEditBinding
+import com.example.uas_ppk.shared_preferences.PrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FormEditActivity : AppCompatActivity() {
     private lateinit var binding : ActivityFormEditBinding
+    private lateinit var prefManager: PrefManager
     private var b:Bundle? = null
     private val listContent = ArrayList<ContentData>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,8 @@ class FormEditActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             with(binding){
                 val caption = txtCaption.text.toString()
-                RClient.instance.updateData(id,caption).enqueue(object : Callback<ResponseCreate>{
+                val token_auth = "Bearer ${prefManager.getToken()}"
+                RClient.instance.updateData(token_auth,id,caption).enqueue(object : Callback<ResponseCreate>{
                     override fun onResponse(
                         call: Call<ResponseCreate>,
                         response: Response<ResponseCreate>

@@ -3,9 +3,16 @@ package com.example.uas_ppk
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.uas_ppk.databinding.ActivityDetailContentBinding
+import com.example.uas_ppk.databinding.FragmentDataContentBinding
+import com.example.uas_ppk.shared_preferences.PrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +21,8 @@ class DetailContentActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailContentBinding
     private var b:Bundle? = null
     private val listContent = ArrayList<ContentData>()
+    private lateinit var prefManager: PrefManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailContentBinding.inflate(layoutInflater)
@@ -36,13 +45,16 @@ class DetailContentActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onRestart() {
         super.onRestart()
         this.recreate()
     }
 
     fun getDataDetail(id:String){
-        RClient.instance.getData(id).enqueue(object : Callback<ResponseDataContent>{
+        val token_auth = "Bearer ${prefManager.getToken()}"
+        RClient.instance.getData(token_auth,id).enqueue(object : Callback<ResponseDataContent>{
             override fun onResponse(
                 call: Call<ResponseDataContent>,
                 response: Response<ResponseDataContent>
@@ -78,7 +90,8 @@ class DetailContentActivity : AppCompatActivity() {
     }
 
     private fun doDeleteData(id:String) {
-        RClient.instance.deleteData(id).enqueue(object : Callback<ResponseCreate>{
+        val token_auth = "Bearer ${prefManager.getToken()}"
+        RClient.instance.deleteData(token_auth,id).enqueue(object : Callback<ResponseCreate>{
             override fun onResponse(
                 call: Call<ResponseCreate>,
                 response: Response<ResponseCreate>

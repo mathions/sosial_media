@@ -5,11 +5,15 @@ import retrofit2.http.*
 
 interface api {
     @GET("content/{cari}")
-    fun getData(@Path("cari") cari:String? = null): Call<ResponseDataContent>
+    fun getData(
+        @Header("Authorization") token_auth:String?,
+        @Path("cari") cari:String? = null
+    ): Call<ResponseDataContent>
 
     @FormUrlEncoded
     @POST("content")
     fun createData(
+        @Header("Authorization") token_auth:String?,
         @Field("username") username:String?,
         @Field("image") image:String?,
         @Field("caption") caption:String?,
@@ -17,11 +21,21 @@ interface api {
         ):Call<ResponseCreate>
 
     @DELETE("content/{id}")
-    fun deleteData(@Path("id") id:String?):Call<ResponseCreate>
+    fun deleteData(
+        @Header("Authorization") token_auth:String?,
+        @Path("id") id:String?
+    ):Call<ResponseCreate>
 
     @FormUrlEncoded
     @PUT("content/{id}") fun updateData(
+        @Header("Authorization") token_auth:String?,
         @Path("id") id: String?,
         @Field("caption") caption:String?
     ):Call<ResponseCreate>
+
+    @GET("login")
+    fun checkUserLogin(
+        @Query("username") username:String,
+        @Query("userpassword") userpassword:String,
+    ):Call<ResponseLogin>
 }
