@@ -18,4 +18,10 @@ interface api {
 
     @DELETE("content/{id}")
     fun deleteData(@Path("id") id:String?):Call<ResponseCreate>
+
+    @FormUrlEncoded
+    @PUT("content/{id}") fun updateData(
+        @Path("id") id: String?,
+        @Field("caption") caption:String?
+    ):Call<ResponseCreate>
 }

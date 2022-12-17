@@ -1,5 +1,6 @@
 package com.example.uas_ppk
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -27,6 +28,17 @@ class DetailContentActivity : AppCompatActivity() {
             id?.let { it1 -> deleteData(it1) }
         }
 
+        binding.btnEdit.setOnClickListener{
+            startActivity(Intent(this,FormEditActivity::class.java).apply{
+                putExtra("id",id)
+            })
+        }
+
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        this.recreate()
     }
 
     fun getDataDetail(id:String){
