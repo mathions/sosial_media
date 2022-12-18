@@ -17,7 +17,7 @@ class FormAddContentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFormAddContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        prefManager = PrefManager(this)
         binding.btnAdd.setOnClickListener{
             saveData()
         }

@@ -22,12 +22,11 @@ class DetailContentActivity : AppCompatActivity() {
     private var b:Bundle? = null
     private val listContent = ArrayList<ContentData>()
     private lateinit var prefManager: PrefManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        prefManager = PrefManager(this)
         b = intent.extras
         val id = b?.getString("id")
 
@@ -43,8 +42,13 @@ class DetailContentActivity : AppCompatActivity() {
             })
         }
 
-    }
+        binding.btnUpload.setOnClickListener {
+            startActivity(Intent(this,FormUploadActivity::class.java).apply {
+                putExtra("id",id)
+            })
+        }
 
+    }
 
 
     override fun onRestart() {

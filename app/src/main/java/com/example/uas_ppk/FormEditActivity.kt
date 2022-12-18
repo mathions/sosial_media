@@ -18,6 +18,7 @@ class FormEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFormEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        prefManager = PrefManager(this)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Form Edit"
 
@@ -52,7 +53,8 @@ class FormEditActivity : AppCompatActivity() {
     }
 
     fun getDataDetail(id:String){
-        RClient.instance.getData(id).enqueue(object : Callback<ResponseDataContent> {
+        val token_auth = "Bearer ${prefManager.getToken()}"
+        RClient.instance.getData(token_auth,id).enqueue(object : Callback<ResponseDataContent> {
             override fun onResponse(
                 call: Call<ResponseDataContent>,
                 response: Response<ResponseDataContent>
