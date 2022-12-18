@@ -6,4 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".FormUploadActivity">
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/linearlayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/img_foto_view"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="20dp"
+            android:src="@mipmap/ic_launcher"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Image"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/btn_select_image"
+            android:backgroundTint="@color/black"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Camera"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/btn_take_camera"
+            android:backgroundTint="@color/black"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="40dp"
+            tools:progress="40"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/btn_save"
+            android:backgroundTint="@color/black"
+            />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

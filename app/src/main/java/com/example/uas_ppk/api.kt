@@ -1,5 +1,7 @@
 package com.example.uas_ppk
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -38,4 +40,12 @@ interface api {
         @Query("username") username:String,
         @Query("userpassword") userpassword:String,
     ):Call<ResponseLogin>
+
+    @Multipart
+    @POST("upload/{id}")
+    fun uploadImage(
+        @Path("id") id: String?,
+        @Part foto: MultipartBody.Part,
+        @Part("_method") _method:RequestBody
+    ):Call<ResponseCreate>
 }
