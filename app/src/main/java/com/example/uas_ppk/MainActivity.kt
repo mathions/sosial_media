@@ -5,8 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.uas_ppk.databinding.ActivityMainBinding
 import com.example.uas_ppk.fragment.DataContentFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -14,6 +20,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navController = findNavController(R.id.fragment)
+
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.uploadFragment, R.id.profileFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+
+        bottomNavigationView.setupWithNavController(navController)
+
+
 
         showDataFragment()
 
