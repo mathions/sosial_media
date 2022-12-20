@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.bumptech.glide.Glide
 import com.example.uas_ppk.databinding.ActivityDetailContentBinding
 import com.example.uas_ppk.databinding.FragmentDataContentBinding
 import com.example.uas_ppk.shared_preferences.PrefManager
@@ -69,6 +70,11 @@ class DetailContentActivity : AppCompatActivity() {
                         tvId.text = listContent[0].id
                         tvImage.text = listContent[0].image
                         tvCaption.text = listContent[0].caption
+
+                        Glide.with(applicationContext)
+                            .load("${RClient.BASE_URL+"uploads/" + listContent[0].image}")
+                            .into(binding.profileImage)
+
                     }
                 }
             }

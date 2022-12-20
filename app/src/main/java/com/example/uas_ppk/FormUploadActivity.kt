@@ -7,9 +7,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import com.example.uas_ppk.databinding.ActivityFormUploadBinding
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -20,10 +23,15 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FormUploadActivity : AppCompatActivity(),UploadRequestBody.UploadCallback {
     private lateinit var binding : ActivityFormUploadBinding
     private var b:Bundle? = null
+    private lateinit var currentPhotoPath: String
+    private lateinit var photoFile:File
 
     private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +50,30 @@ class FormUploadActivity : AppCompatActivity(),UploadRequestBody.UploadCallback 
             id?.let { it1 -> doUploadImage(it1) }
         }
 
+        binding.btnTakeCamera.setOnClickListener{
+            takePictureCamera()
+        }
+    }
+
+    val REQUEST_IMAGE_CAPTURE = 1
+    private fun takePictureCamera() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                // Create the File where the photo should go
+                photoFile = createImageFile()
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        applicationContext,
+                        "com.example.android.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
     }
 
     private fun doUploadImage(id:String) {
@@ -99,6 +131,13 @@ class FormUploadActivity : AppCompatActivity(),UploadRequestBody.UploadCallback 
             selectedImageUri = data?.data
             binding.imgFotoView.setImageURI(selectedImageUri)
         }
+
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            val uri = FileProvider.getUriForFile(applicationContext,"com.example.android.fileprovider"
+                ,photoFile)
+            selectedImageUri = uri
+            binding.imgFotoView.setImageURI(selectedImageUri)
+        }
     }
 
     private fun ContentResolver.getFileName(fileUri: Uri): String {
@@ -115,6 +154,21 @@ class FormUploadActivity : AppCompatActivity(),UploadRequestBody.UploadCallback 
 
     override fun onProgressUpdate(percentage: Int) {
         binding.progressBar.progress = percentage
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
     }
 
 }

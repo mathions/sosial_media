@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.uas_ppk.databinding.ListDataContentBinding
 
 class ContentAdapter(
@@ -21,6 +22,10 @@ class ContentAdapter(
                 txtImage.text = contentData.image
                 txtCaption.text = contentData.caption
                 txtDate.text = contentData.date
+
+                Glide.with(context)
+                    .load("${RClient.BASE_URL+"uploads/" + contentData.image}")
+                    .into(binding.profileImage)
 
                 cvData.setOnClickListener{
                     var i = Intent(context,DetailContentActivity::class.java).apply {
