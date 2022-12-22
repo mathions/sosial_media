@@ -24,6 +24,11 @@ class FormLoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             doLogin()
         }
+
+        binding.btnRegister.setOnClickListener{
+            startActivity(Intent(this, FormRegisterActivity::class.java))
+        }
+
     }
 
     fun doLogin(){

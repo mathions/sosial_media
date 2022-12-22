@@ -48,4 +48,14 @@ interface api {
         @Part foto: MultipartBody.Part,
         @Part("_method") _method:RequestBody
     ):Call<ResponseCreate>
+
+    @FormUrlEncoded
+    @POST("user")
+    fun createUser(
+        @Field("username") username:String?,
+        @Field("userpassword") userpassword: String?,
+        @Field("useremail") useremail:String?,
+        @Field("fullname") fullname:String?
+    ):Call<ResponseCreate>
+
 }

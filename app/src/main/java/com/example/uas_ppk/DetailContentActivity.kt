@@ -67,13 +67,16 @@ class DetailContentActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     response.body()?.let { listContent.addAll(it.data) }
                     with(binding){
-                        tvId.text = listContent[0].id
-                        tvImage.text = listContent[0].image
                         tvCaption.text = listContent[0].caption
+                        tvUsername.text = listContent[0].username
 
                         Glide.with(applicationContext)
                             .load("${RClient.BASE_URL+"uploads/" + listContent[0].image}")
                             .into(binding.profileImage)
+
+                        Glide.with(applicationContext)
+                            .load("${RClient.BASE_URL+"uploads/" + listContent[0].image}")
+                            .into(binding.image)
 
                     }
                 }

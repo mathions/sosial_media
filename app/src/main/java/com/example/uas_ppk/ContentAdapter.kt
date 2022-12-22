@@ -19,13 +19,15 @@ class ContentAdapter(
         fun bind(contentData: ContentData){
             with(binding){
                 txtUsername.text = contentData.username
-                txtImage.text = contentData.image
                 txtCaption.text = contentData.caption
-                txtDate.text = contentData.date
 
                 Glide.with(context)
                     .load("${RClient.BASE_URL+"uploads/" + contentData.image}")
                     .into(binding.profileImage)
+
+                Glide.with(context)
+                    .load("${RClient.BASE_URL+"uploads/" + contentData.image}")
+                    .into(binding.image)
 
                 cvData.setOnClickListener{
                     var i = Intent(context,DetailContentActivity::class.java).apply {
