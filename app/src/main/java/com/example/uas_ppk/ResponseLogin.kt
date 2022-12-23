@@ -7,6 +7,6 @@ data class ResponseLogin(
     @SerializedName("error") val err:Int,
     @SerializedName("messages") val msg:String,
     val token:String,
-    val email:String,
+    val id:String,
     val username:String
 )

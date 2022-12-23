@@ -20,8 +20,6 @@ import retrofit2.Response
 
 class DataContentFragment : Fragment() {
     private var _binding: FragmentDataContentBinding? = null
-    // This property is only valid between onCreateView and
-// onDestroyView.
     private val binding get() = _binding!!
 
     private val listContent = ArrayList<ContentData>()

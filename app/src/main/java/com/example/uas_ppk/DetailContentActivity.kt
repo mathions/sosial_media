@@ -71,7 +71,7 @@ class DetailContentActivity : AppCompatActivity() {
                         tvUsername.text = listContent[0].username
 
                         Glide.with(applicationContext)
-                            .load("${RClient.BASE_URL+"uploads/" + listContent[0].image}")
+                            .load("${RClient.BASE_URL+"profile/" + listContent[0].username}")
                             .into(binding.profileImage)
 
                         Glide.with(applicationContext)

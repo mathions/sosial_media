@@ -15,11 +15,8 @@ interface api {
     @FormUrlEncoded
     @POST("content")
     fun createData(
-        @Header("Authorization") token_auth:String?,
         @Field("username") username:String?,
-        @Field("image") image:String?,
         @Field("caption") caption:String?,
-        @Field("date") date:String?
         ):Call<ResponseCreate>
 
     @DELETE("content/{id}")
@@ -57,5 +54,17 @@ interface api {
         @Field("useremail") useremail:String?,
         @Field("fullname") fullname:String?
     ):Call<ResponseCreate>
+
+    @GET("user/{id}")
+    fun getProfile(
+        @Path("id") id:String? = null
+    ): Call<ResponseProfile>
+
+    @FormUrlEncoded
+    @PUT("user/{id}") fun updateProfil(
+        @Path("id") id: String?,
+        @Field("useremail") email:String?,
+        @Field("fullname") fullname:String?
+    ):Call<ResponseEditProfile>
 
 }

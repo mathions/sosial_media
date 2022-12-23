@@ -3,6 +3,7 @@ package com.example.uas_ppk
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.uas_ppk.databinding.ActivityFormEditBinding
 import com.example.uas_ppk.shared_preferences.PrefManager
 import retrofit2.Call
@@ -19,8 +20,6 @@ class FormEditActivity : AppCompatActivity() {
         binding = ActivityFormEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prefManager = PrefManager(this)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Form Edit"
 
         b = intent.extras
         val id = b?.getString("id")
@@ -62,8 +61,18 @@ class FormEditActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     response.body()?.let { listContent.addAll(it.data) }
                     with(binding){
-                        txtImage.setText(listContent[0].image)
                         txtCaption.setText(listContent[0].caption)
+
+                        tvUsername.text = listContent[0].username
+
+                        Glide.with(applicationContext)
+                            .load("${RClient.BASE_URL+"profile/" + listContent[0].username}")
+                            .into(binding.profileImage)
+
+                        Glide.with(applicationContext)
+                            .load("${RClient.BASE_URL+"uploads/" + listContent[0].image}")
+                            .into(binding.image)
+
                     }
                 }
             }

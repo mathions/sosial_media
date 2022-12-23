@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -49,8 +50,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        prefManager.removeData()
-        startActivity(Intent(this, FormLoginActivity::class.java))
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setMessage("Log Out of Twitter ?")
+            .setCancelable(false)
+            .setPositiveButton("Logout"){dialog, id->
+                prefManager.removeData()
+                startActivity(Intent(this, FormLoginActivity::class.java))
+            }
+            .setNegativeButton("Cancel"){dialog, id->
+                dialog.dismiss()
+            }
+        var alert = builder.create()
+        alert.show()
     }
 
     fun showDataFragment(){

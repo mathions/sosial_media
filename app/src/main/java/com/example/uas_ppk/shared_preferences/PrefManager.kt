@@ -27,8 +27,8 @@ class PrefManager(var context: Context) {
         editor.commit()
     }
 
-    fun setEmail(email:String){
-        editor.putString("email",email)
+    fun setId(id:String){
+        editor.putString("id",id)
         editor.commit()
     }
 
@@ -40,8 +40,8 @@ class PrefManager(var context: Context) {
         return pref.getString("username", "")
     }
 
-    fun getEmail():String?{
-        return pref.getString("email", "")
+    fun getId():String?{
+        return pref.getString("id", "")
     }
 
     fun getToken():String?{
@@ -52,4 +52,5 @@ class PrefManager(var context: Context) {
         editor.clear()
         editor.commit()
     }
+
 }

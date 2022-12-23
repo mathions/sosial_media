@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.uas_ppk.databinding.ListDataContentBinding
+import com.example.uas_ppk.shared_preferences.PrefManager
 
 class ContentAdapter(
     private val listContent:ArrayList<ContentData>,
@@ -22,7 +23,7 @@ class ContentAdapter(
                 txtCaption.text = contentData.caption
 
                 Glide.with(context)
-                    .load("${RClient.BASE_URL+"uploads/" + contentData.image}")
+                    .load("${RClient.BASE_URL+"profile/" + contentData.username}")
                     .into(binding.profileImage)
 
                 Glide.with(context)

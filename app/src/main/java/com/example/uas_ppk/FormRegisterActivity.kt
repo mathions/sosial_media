@@ -38,37 +38,57 @@ class FormRegisterActivity : AppCompatActivity() {
             val useremail = txtUseremail.text.toString()
             val fullname = txtFullname.text.toString()
 
-            RClient.instance.createUser(username, userpassword, useremail, fullname)
-                .enqueue(object :
-                    Callback<ResponseCreate> {
-                    override fun onResponse(
-                        call: Call<ResponseCreate>,
-                        response: Response<ResponseCreate>
-                    ) {
-                        if (response.isSuccessful) {
-                            Toast.makeText(
-                                applicationContext,
-                                "${response.body()?.pesan}",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            startActivity(Intent(this@FormRegisterActivity,FormLoginActivity::class.java))
-                            finish()
-                        } else {
-                            val jsonObj = JSONObject(response.errorBody()!!.charStream().readText())
-                            val messagesError = JSONObject(jsonObj.getString("message"))
-                            if(messagesError.getString("error") != ""){
-                                binding.txtUsername.setError(messagesError.getString("error"))
-                                binding.txtUsername.requestFocus()
+            if (username.isEmpty() || username == "") {
+                binding.txtUsername.setError("Username is required")
+                binding.txtUsername.requestFocus()
+            } else if (userpassword.isEmpty() || userpassword == "") {
+                binding.txtUserpassword.setError("Password is required")
+                binding.txtUserpassword.requestFocus()
+            } else if (useremail.isEmpty() || useremail == "") {
+                binding.txtUseremail.setError("Email is required")
+                binding.txtUseremail.requestFocus()
+            } else if (fullname.isEmpty() || fullname == "") {
+                binding.txtFullname.setError("Fullname is required")
+                binding.txtFullname.requestFocus()
+            } else {
+                RClient.instance.createUser(username, userpassword, useremail, fullname)
+                    .enqueue(object :
+                        Callback<ResponseCreate> {
+                        override fun onResponse(
+                            call: Call<ResponseCreate>,
+                            response: Response<ResponseCreate>
+                        ) {
+                            if (response.isSuccessful) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "${response.body()?.pesan}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                startActivity(
+                                    Intent(
+                                        this@FormRegisterActivity,
+                                        FormLoginActivity::class.java
+                                    )
+                                )
+                                finish()
+                            } else {
+                                val jsonObj = JSONObject(response.errorBody()!!.charStream().readText())
+                                val messagesError = JSONObject(jsonObj.getString("message"))
+
+                                if(messagesError.getString("username") != ""){
+                                    binding.txtUsername.setError(messagesError.getString("username"))
+                                    binding.txtUsername.requestFocus()
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
+                        override fun onFailure(call: Call<ResponseCreate>, t: Throwable) {
 
-                    }
+                        }
 
-                })
+                    })
 
+            }
         }
     }
 }

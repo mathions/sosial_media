@@ -5,8 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormRegisterActivity"
+    tools:context=".EditProfilActivity"
     android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="User Id"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="8dp"
+        tools:ignore="MissingConstraints">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:id="@+id/txt_userid"
+            android:inputType="textPersonName"
+            android:enabled="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldUsername"
@@ -16,35 +33,13 @@
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="8dp"
         tools:ignore="MissingConstraints">
-
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:id="@+id/txt_username"
             android:inputType="textPersonName"
-            />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldUserpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="8dp"
-        tools:ignore="MissingConstraints"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:id="@+id/txt_userpassword"
-            android:inputType="textPassword"
-            />
-
+            android:enabled="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,15 +50,12 @@
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="8dp"
         tools:ignore="MissingConstraints">
-
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:id="@+id/txt_useremail"
-            android:inputType="textEmailAddress"
-            />
-
+            android:id="@+id/txt_email"
+            android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -74,45 +66,24 @@
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="8dp"
         tools:ignore="MissingConstraints">
-
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:id="@+id/txt_fullname"
-            android:inputType="textPersonName"
-            />
-
+            android:inputType="textPersonName"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="8dp"
-        android:id="@+id/btn_register"
-        android:text="Register"
-        android:backgroundTint="#1DA1F2"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btn_update"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_fullname"
+        android:text="Update"
+        android:textAllCaps="false"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="1dp"
-        android:text="Already have an account ?"
-        android:textSize="15sp"
-        />
-
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="8dp"
-        android:id="@+id/btn_login"
-        android:text="Login"
-        android:textColor="#1DA1F2"
-        android:backgroundTint="#ffffff"
         />
 
 </LinearLayout>

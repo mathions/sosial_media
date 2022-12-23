@@ -51,7 +51,7 @@ class FormLoginActivity : AppCompatActivity() {
                         if(response.isSuccessful){
                             response.body()?.let { prefManager.setToken(it.token) }
                             response.body()?.let { prefManager.setUsername(it.username) }
-                            response.body()?.let { prefManager.setEmail(it.email) }
+                            response.body()?.let { prefManager.setId(it.id) }
 
                             Toast.makeText(applicationContext,"${response.body()?.msg}",Toast.LENGTH_LONG).show()
                             startActivity(Intent(this@FormLoginActivity,MainActivity::class.java))
